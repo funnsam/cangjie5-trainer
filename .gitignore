@@ -1,0 +1,3 @@
+/target
+*.dict.yaml
+src/cangjie.bin
