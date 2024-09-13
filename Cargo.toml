@@ -1,5 +1,8 @@
+[workspace]
+members = [".", "cangjie5-trainer-raylib"]
+
 [package]
-name = "canjie5-trainer"
+name = "cangjie-dict"
 version = "0.1.0"
 edition = "2021"
 

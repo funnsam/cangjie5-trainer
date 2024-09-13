@@ -1,0 +1,9 @@
+[package]
+name = "cangjie5-trainer-raylib"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cangjie-dict = { version = "0.1.0", path = ".." }
+fastrand = "2.1.1"
+raylib = "5.0.2"

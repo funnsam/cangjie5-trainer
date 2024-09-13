@@ -1,3 +1,4 @@
 /target
 *.dict.yaml
-src/cangjie.bin
+/src/lib.rs
+*.ttf
