@@ -92,7 +92,7 @@ fn main() {
             Some(KeyboardKey::KEY_X) if textfield.len() < 5 && !ans_shown => textfield.push('x'),
             Some(KeyboardKey::KEY_Y) if textfield.len() < 5 && !ans_shown => textfield.push('y'),
 
-            Some(KeyboardKey::KEY_BACKSPACE) => { textfield.pop(); },
+            Some(KeyboardKey::KEY_BACKSPACE) if !ans_shown => { textfield.pop(); },
             _ => {},
         }
 

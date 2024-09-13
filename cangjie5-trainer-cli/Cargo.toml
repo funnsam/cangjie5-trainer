@@ -1,0 +1,9 @@
+[package]
+name = "cangjie5-trainer-cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cangjie-dict = { version = "0.1.0", path = ".." }
+crossterm = "0.28.1"
+fastrand = "2.1.1"
