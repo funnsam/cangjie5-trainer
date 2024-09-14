@@ -1,7 +1,11 @@
 use std::io::{self, Write};
 use crossterm::{*, event::*, style::Stylize};
 
+mod args;
+
 fn main() -> io::Result<()> {
+    let args = <args::Args as clap::Parser>::parse();
+
     let mut stdout = io::stdout();
     terminal::enable_raw_mode()?;
     execute!(stdout, terminal::EnterAlternateScreen, terminal::Clear(terminal::ClearType::All))?;
@@ -46,7 +50,7 @@ fn main() -> io::Result<()> {
             style::PrintStyledContent(format!("{corr_c} / {totl_c} ({:.01}%)", (corr_c as f64 / totl_c as f64).max(0.0) * 100.0).bold()),
         )?;
 
-        for (eid, ec) in errs.iter() {
+        for (eid, ec) in errs.iter().rev() {
             let e = get_char(*eid);
 
             queue!(
@@ -88,7 +92,12 @@ fn main() -> io::Result<()> {
                     rescramble(&mut n);
                     textfield.clear();
                 } else {
-                    corr = get_char(n).1.contains(&textfield.as_str());
+                    corr = if !args.quick {
+                        get_char(n).1.contains(&textfield.as_str())
+                    } else {
+                        get_char(n).1.iter().any(|s| s == &textfield || (textfield.len() != 0 && s.as_bytes()[0] == textfield.as_bytes()[0] && s.as_bytes().last() == textfield.as_bytes().last()))
+                    };
+
                     if !corr {
                         errs.push((n, format!("{textfield:<5}")));
                     }
@@ -100,7 +109,7 @@ fn main() -> io::Result<()> {
             },
 
             Event::Key(KeyEvent { code: KeyCode::Char(c), kind: KeyEventKind::Press, .. })
-                if matches!(c, 'a'..='y') && textfield.len() < 5 && !ans_shown
+                if matches!(c, 'a'..='y') && ((textfield.len() < 5 && !args.quick) || (textfield.len() < 2 && args.quick)) && !ans_shown
                     => textfield.push(c),
             Event::Key(KeyEvent { code: KeyCode::Backspace, kind: KeyEventKind::Press, .. })
                 if !ans_shown

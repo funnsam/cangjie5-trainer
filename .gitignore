@@ -1,5 +1,5 @@
 /target
-*.dict.yaml
+*.dict*
 /src/lib.rs
 *.ttf
 *.zip

@@ -4,7 +4,7 @@ run-rel: ../src/lib.rs
 run-deb: ../src/lib.rs
 	cargo r
 
-../src/lib.rs: ../Makefile ../cangjie5.dict.yaml ../conv.py
+../src/lib.rs: ../Makefile ../conv.py
 	make -C .. src/lib.rs
 
 .PHONY: run-rel run-deb

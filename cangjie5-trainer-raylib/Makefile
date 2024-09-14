@@ -14,7 +14,7 @@ font: FSung.zip
 FSung.zip:
 	gdown 1m0-WYAXbEz3lxJrti25ZvWv6LkHjMp2X -O FSung.zip
 
-../src/lib.rs: ../Makefile ../cangjie5.dict.yaml ../conv.py
+../src/lib.rs: ../Makefile ../conv.py
 	make -C .. src/lib.rs
 
 .PHONY: run-rel run-deb
