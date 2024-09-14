@@ -37,8 +37,9 @@ fn main() {
         .build();
     rl.set_exit_key(None);
 
+    // TODO: use fsung
     let big_chi_font = rl.load_font_ex(&thread, "noto_sans_hk.ttf", 48, Some(cangjie_dict::ALL)).unwrap();
-    let ui_font = rl.load_font_ex(&thread, "noto_sans_hk.ttf", 28, None).unwrap();
+    let ui_font = rl.load_font_ex(&thread, "font/FSung-p.ttf", 28, None).unwrap();
 
     let mut rand = fastrand::Rng::new();
     let mut n = 0;

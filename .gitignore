@@ -2,3 +2,5 @@
 *.dict.yaml
 /src/lib.rs
 *.ttf
+*.zip
+/cangjie-trainer-raylib/font

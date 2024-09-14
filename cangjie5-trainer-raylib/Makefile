@@ -1,15 +1,18 @@
-run-rel: ../src/lib.rs noto_sans_hk.ttf
+run-rel: ../src/lib.rs font
 	cargo r -r
 
-run-deb: ../src/lib.rs noto_sans_hk.ttf
+run-deb: ../src/lib.rs font
 	cargo r
 
-noto_sans_hk.ttf: noto_sans_hk_v.ttf
-	fonttools varLib.mutator noto_sans_hk_v.ttf wght=400 wdth=90
-	mv noto_sans_hk_v-instance.ttf noto_sans_hk.ttf
+font: FSung.zip
+	unzip -n FSung.zip -d font -x FSung-F.ttf FSung-m.ttf FSung-X.ttf *.reg *.txt
+	find font/ -name FSung-p.ttf | grep .
+	find font/ -name FSung-1.ttf | grep .
+	find font/ -name FSung-2.ttf | grep .
+	find font/ -name FSung-3.ttf | grep .
 
-noto_sans_hk_v.ttf:
-	curl "https://raw.githubusercontent.com/google/fonts/main/ofl/notosanshk/NotoSansHK%5bwght%5d.ttf" -o noto_sans_hk_v.ttf
+FSung.zip:
+	gdown 1m0-WYAXbEz3lxJrti25ZvWv6LkHjMp2X -O FSung.zip
 
 ../src/lib.rs: ../Makefile ../cangjie5.dict.yaml ../conv.py
 	make -C .. src/lib.rs
