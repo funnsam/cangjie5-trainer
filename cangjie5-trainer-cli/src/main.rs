@@ -100,6 +100,7 @@ fn main() -> io::Result<()> {
 
                     if !corr {
                         errs.push((n, format!("{textfield:<5}")));
+                        errs.drain(..errs.len().saturating_sub(terminal::size()?.1 as usize - 4));
                     }
 
                     corr_c += corr as usize;
@@ -116,8 +117,6 @@ fn main() -> io::Result<()> {
                     => { textfield.pop(); },
             _ => {},
         }
-
-        errs.drain(..errs.len().saturating_sub(terminal::size()?.1 as usize - 4));
 
         render(n, ans_shown, corr, corr_c, totl_c, &errs, &textfield)?;
     }

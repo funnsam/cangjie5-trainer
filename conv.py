@@ -8,7 +8,7 @@ with open("cangjie5.dict.txt", "r") as file:
     for line in file.readlines():
         tabs = line.split("\t")
 
-        if hanzidentifier.is_traditional(tabs[0]):
+        if not hanzidentifier.is_simplified(tabs[0]):
             if tabs[0] not in words: words[tabs[0]] = set()
 
             words[tabs[0]] = words[tabs[0]] | set(['"' + t.strip().replace("tlc", "tmc") + '"' for t in filter(lambda c: not (c.startswith("x") or ("z" in c) or ("[" in c)), tabs[1:])])

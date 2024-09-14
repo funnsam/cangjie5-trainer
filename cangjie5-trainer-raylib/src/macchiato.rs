@@ -1,3 +1,5 @@
+#![allow(unused)]
+
 use raylib::core::color::Color;
 
 pub const ROSEWATER: Color = Color::new(244, 219, 214, 255);

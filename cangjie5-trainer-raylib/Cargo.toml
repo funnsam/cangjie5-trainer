@@ -7,4 +7,5 @@ edition = "2021"
 cangjie-dict = { version = "0.1.0", path = ".." }
 clap = { version = "4.5.17", features = ["derive"] }
 fastrand = "2.1.1"
+indexmap = "2.5.0"
 raylib = "5.0.2"
