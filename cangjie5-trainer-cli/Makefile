@@ -1,8 +1,8 @@
 run-rel: ../src/lib.rs
-	cargo r -r
+	cargo r -r -- -ea
 
 run-deb: ../src/lib.rs
-	cargo r
+	cargo r -- -ea
 
 ../src/lib.rs: ../Makefile ../conv.py
 	make -C .. src/lib.rs

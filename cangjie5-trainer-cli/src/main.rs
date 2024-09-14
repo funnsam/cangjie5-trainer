@@ -12,10 +12,20 @@ fn main() -> io::Result<()> {
 
     let mut rand = fastrand::Rng::new();
     let mut n = 0;
-    let mut rescramble = |n: &mut usize| *n = rand.usize(0..cangjie_dict::CHARS.len());
-    rescramble(&mut n);
 
     let get_char = |n: usize| &cangjie_dict::CHARS[n];
+
+    let mut rescramble = |n: &mut usize| {
+        *n = rand.usize(0..cangjie_dict::CHARS.len());
+
+        while {
+            let c = get_char(*n).0 as u32;
+            !((0x4e00..=0x9fff).contains(&c) || args.extensions.iter().any(|e| e.range().contains(&c)))
+        } {
+            *n = rand.usize(0..cangjie_dict::CHARS.len());
+        }
+    };
+    rescramble(&mut n);
 
     let mut textfield = String::with_capacity(5);
     let mut ans_shown = false;
@@ -48,6 +58,7 @@ fn main() -> io::Result<()> {
             cursor::MoveTo(0, 3),
             terminal::Clear(terminal::ClearType::UntilNewLine),
             style::PrintStyledContent(format!("{corr_c} / {totl_c} ({:.01}%)", (corr_c as f64 / totl_c as f64).max(0.0) * 100.0).bold()),
+            // style::Print(format!(" U+{:05x}", get_char(n).0 as u32)),
         )?;
 
         for (eid, ec) in errs.iter().rev() {

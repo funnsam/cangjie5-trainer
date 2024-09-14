@@ -1,6 +1,6 @@
 /target
 *.dict*
 /src/lib.rs
-*.ttf
 *.zip
-/cangjie-trainer-raylib/font
+/cangjie5-trainer-raylib/font
+/Unihan*
