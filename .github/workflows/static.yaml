@@ -30,7 +30,7 @@ jobs:
         pip3 install gdown
         npm install uglify-js -g
     - name: Build
-      run: cd cangjie5-trainer-web; make pkg
+      run: cd cangjie5-trainer-web; make build
     - name: Setup Pages
       uses: actions/configure-pages@v5
     - name: Upload artifact
