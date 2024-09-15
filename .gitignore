@@ -1,6 +1,5 @@
 /target
 *.dict*
-/src/lib.rs
 *.zip
 /cangjie5-trainer-raylib/font
 /cangjie5-trainer-web/font
