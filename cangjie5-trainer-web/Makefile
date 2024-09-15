@@ -17,6 +17,7 @@ script.min.js: script.js
 	fi
 
 script.js: _script.js
+	make -C .. cangjie5.dict.txt Unihan_Variants.txt
 	cd ..; python3 conv_js.py $(shell pwd)/script.js
 	cat _script.js >> script.js
 
