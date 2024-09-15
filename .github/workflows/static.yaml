@@ -28,6 +28,7 @@ jobs:
         curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
         sudo apt install binaryen python3 python3-pip
         pip3 install gdown
+        npm install uglify-js -g
     - name: Build
       run: cd cangjie5-trainer-web; make pkg
     - name: Setup Pages
