@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+@font-face {
+    font-family: FSung-A;
+    src: url("./font/FSung-p.ttf") format("truetype");
+    ascent-override: 60%;
+}
+
+@font-face {
+    font-family: FSung-B;
+    src: url("./font/FSung-2.ttf") format("truetype");
+    ascent-override: 60%;
+}
+
+@font-face {
+    font-family: FSung-C;
+    src: url("./font/FSung-3.ttf") format("truetype");
+    ascent-override: 60%;
+}
+
+:root {
+    --rosewater: #f4dbd6;
+    --flamingo: #f0c6c6;
+    --pink: #f5bde6;
+    --mauve: #c6a0f6;
+    --red: #ed8796;
+    --maroon: #ee99a0;
+    --peach: #f5a97f;
+    --yellow: #eed49f;
+    --green: #a6da95;
+    --teal: #8bd5ca;
+    --sky: #91d7e3;
+    --sapphire: #7dc4e4;
+    --blue: #8aadf4;
+    --lavender: #b7bdf8;
+    --text: #cad3f5;
+    --subtext1: #b8c0e0;
+    --subtext0: #a5adcb;
+    --overlay2: #939ab7;
+    --overlay1: #8087a2;
+    --overlay0: #6e738d;
+    --surface2: #5b6078;
+    --surface1: #494d64;
+    --surface0: #363a4f;
+    --base: #24273a;
+    --mantle: #1e2030;
+    --crust: #181926;
+}
+
+html {
+    background-color: var(--base);
+    color: var(--text);
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    font-family: "Source Code Pro", monospace;
+    font-size: 18pt;
+}
+
+.chi_plane0 { font-family: FSung-A; }
+.chi_plane2 { font-family: FSung-B; }
+.chi_plane3 { font-family: FSung-C; }
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0.5rem;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.25rem;
+}
+
+#top {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+#target {
+    width: 1em;
+    height: 1em;
+    font-size: 48pt;
+}
+
+#top_inner {
+    flex-grow: 1;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#input {
+    outline: none;
+    border: none;
+    background-color: var(--surface0);
+    color: var(--text);
+}
+
+#answer { height: 1em; }
+
+#errors {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+#errors > div {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+}
+
+#errors > div > .text { padding-top: 0.1em; }
+#errors > div > .may_correct:not(.correct) { white-space: pre-wrap; }
+#errors > div > .correct { flex-grow: 1; }
+
+.may_correct.correct { color: var(--green); }
+.may_correct:not(.correct) { color: var(--red); }
