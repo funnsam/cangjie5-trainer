@@ -1,9 +1,4 @@
-pkg: ../src/lib.rs src Cargo.toml font
-	if [ "$(DEBUG)" = "1" ]; then \
-		wasm-pack build --target web --dev; \
-	else \
-		wasm-pack build --target web; \
-	fi
+build: font script.min.js
 
 font: FSung.zip
 	unzip -n FSung.zip -d font -x FSung-1.ttf FSung-F.ttf FSung-m.ttf FSung-X.ttf *.reg *.txt
@@ -14,7 +9,15 @@ font: FSung.zip
 FSung.zip:
 	gdown 1m0-WYAXbEz3lxJrti25ZvWv6LkHjMp2X -O FSung.zip
 
-../src/lib.rs: ../Makefile ../conv.py
-	make -C .. src/lib.rs
+script.min.js: script.js
+	if ! command -v uglifyjs &> /dev/null; then \
+		cp script.js script.min.js; \
+	else \
+		uglifyjs script.js -c -m -o script.min.js; \
+	fi
 
-.PHONY: pkg
+script.js: _script.js
+	cd ..; python3 conv_js.py $(shell pwd)/script.js
+	cat _script.js >> script.js
+
+.PHONY: build

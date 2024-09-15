@@ -3,5 +3,6 @@
 *.zip
 /cangjie5-trainer-raylib/font
 /cangjie5-trainer-web/font
-/cangjie5-trainer-web/pkg
+/cangjie5-trainer-web/script.js
+/cangjie5-trainer-web/script.min.js
 /Unihan*

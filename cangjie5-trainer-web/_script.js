@@ -1,5 +1,3 @@
-import init, * as cangjie5 from "./pkg/cangjie5_trainer_web.js";
-
 function set_chi_class(t) {
     t.classList.remove("chi_plane0");
     t.classList.remove("chi_plane2");
@@ -20,15 +18,15 @@ document.addEventListener("DOMContentLoaded", (_) => {
     let n = 0;
     let ans_shown = false;
 
-    let corr_c = 0;
-    let totl_c = 0;
+    let corr_c = window.localStorage.getItem("corr") | 0;
+    let totl_c = window.localStorage.getItem("totl") | 0;
 
     function rescramble() {
-        n = Math.floor(Math.random() * cangjie5.chars_len());
-        target.innerText = cangjie5.id_char(n);
+        n = Math.floor(Math.random() * chars.length);
+        target.innerText = chars[n][0];
         set_chi_class(target);
     }
-    init().then(rescramble);
+    rescramble();
 
     input.onkeydown = (e) => {
         let is_valid = e.key.length == 1 && 0x61 <= e.key.codePointAt(0) && e.key.codePointAt(0) <= 0x79;
@@ -41,14 +39,19 @@ document.addEventListener("DOMContentLoaded", (_) => {
                 rescramble();
                 answer.innerText = "";
             } else {
-                answer.innerText = cangjie5.id_codes(n).join(" / ");
-                let corr = cangjie5.id_codes(n).includes(e.target.value)
+                let code = chars[n][1];
+                let code_txt = code.join(" / ");
+
+                answer.innerText = code_txt;
+                let corr = code.includes(e.target.value)
 
                 if (corr) answer.classList.add("correct");
                 else answer.classList.remove("correct");
 
                 corr_c += corr;
                 totl_c += 1;
+                window.localStorage.setItem("corr", corr_c);
+                window.localStorage.setItem("totl", totl_c);
 
                 stats.innerText = `${corr_c} / ${totl_c} (${(corr_c / totl_c * 100).toFixed(1)}%)`;
 
@@ -72,7 +75,7 @@ document.addEventListener("DOMContentLoaded", (_) => {
                     line.appendChild(ans_div);
                     ans_div.classList.add("may_correct");
                     ans_div.classList.add("correct");
-                    const ans = document.createTextNode(answer.innerText);
+                    const ans = document.createTextNode(code_txt);
                     ans_div.appendChild(ans);
 
                     errors.prepend(line);
