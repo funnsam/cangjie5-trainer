@@ -1,5 +1,5 @@
 [workspace]
-members = [".", "cangjie5-trainer-cli", "cangjie5-trainer-raylib", "cangjie5-trainer-web"]
+members = [".", "cangjie5-trainer-cli", "cangjie5-trainer-raylib"]
 
 [package]
 name = "cangjie-dict"

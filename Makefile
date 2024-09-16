@@ -1,5 +1,5 @@
-src/lib.rs: cangjie5.dict.txt conv.py Unihan_Variants.txt
-	python3 conv.py
+src/lib.rs: cangjie5.dict.txt conv_rs.py Unihan_Variants.txt
+	python3 conv_rs.py src/lib.rs
 
 cangjie5.dict.txt:
 	curl https://raw.githubusercontent.com/Jackchows/Cangjie5/master/Cangjie5.txt \
